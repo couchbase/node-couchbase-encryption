@@ -9,6 +9,14 @@
 
 var crypto = require('crypto');
 
+/**
+ * AesCryptoProvider is a crypto provider for AES encryption.  It
+ * currently supports 256-bit AES encryption.
+ * 
+ * @param {KeyProvider} keyProvider 
+ * @param {string} key 
+ * @param {string} hmacKey 
+ */
 function AesCryptoProvider(keyProvider, key, hmacKey) {
   if (!hmacKey) {
     hmacKey = key;
@@ -19,7 +27,7 @@ function AesCryptoProvider(keyProvider, key, hmacKey) {
   this.hmacKey = hmacKey;
 }
 
-AesCryptoProvider.prototype.algNameFromKey = function(key, hmacKey) {
+AesCryptoProvider.prototype._algNameFromKey = function(key, hmacKey) {
   switch (key.length) {
     case 32:
       return 'AES-256-HMAC-SHA256';
@@ -28,6 +36,12 @@ AesCryptoProvider.prototype.algNameFromKey = function(key, hmacKey) {
   }
 };
 
+/**
+ * encrypt perform encryption on a field and returns the encrypted data.
+ * 
+ * @param {*} data
+ * @returns {*}
+ */
 AesCryptoProvider.prototype.encrypt = function(data) {
   var key = this.keyProvider.getKey(this.key);
 
@@ -36,7 +50,7 @@ AesCryptoProvider.prototype.encrypt = function(data) {
     hmacKey = this.keyProvider.getKey(this.hmacKey);
   }
 
-  var algName = this.algNameFromKey(key, hmacKey);
+  var algName = this._algNameFromKey(key, hmacKey);
 
   var iv = crypto.randomBytes(16);
   var codedIv = iv.toString('base64');
@@ -71,6 +85,12 @@ AesCryptoProvider.prototype.encrypt = function(data) {
   }
 };
 
+/**
+ * decrypt perform encryption on a field and returns the encrypted data.
+ * 
+ * @param {*} data
+ * @returns {*}
+ */
 AesCryptoProvider.prototype.decrypt = function(data) {
   var key = this.keyProvider.getKey(this.key);
 
@@ -79,7 +99,7 @@ AesCryptoProvider.prototype.decrypt = function(data) {
     hmacKey = this.keyProvider.getKey(this.hmacKey);
   }
 
-  var algName = this.algNameFromKey(key, hmacKey);
+  var algName = this._algNameFromKey(key, hmacKey);
 
   if (data.kid !== this.key) {
     throw new Error('encryption key did not match configured key.');

@@ -10,6 +10,14 @@
 exports.InsecureKeyStore = require('./insecurekeystore');
 exports.AesCryptoProvider = require('./aescryptoprovider');
 
+/**
+ * encryptFields will take a document and perform encryption on
+ * various fields, as specified by the field/provider map passed.
+ * 
+ * @param {Object} doc 
+ * @param {Map<string,CryptoProvider>} fields
+ * @returns {Object}
+ */
 exports.encryptFields = function(doc, fields) {
   var docOut = {};
   for (var i in doc) {
@@ -32,6 +40,14 @@ exports.encryptFields = function(doc, fields) {
   return docOut;
 };
 
+/**
+ * decryptFields will take a document and perform decryption on
+ * various fields, as specified by the field/provider map passed.
+ * 
+ * @param {Object} doc 
+ * @param {Map<string,CryptoProvider>} fields
+ * @returns {Object}
+ */
 exports.decryptFields = function(doc, fields) {
   var docOut = {};
   for (var i in doc) {
