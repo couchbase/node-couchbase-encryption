@@ -3,17 +3,18 @@
        "lib": ["es2015"],
        "module": "commonjs",
        "target": "es2015",
-   
+
        "strict": true,
        "esModuleInterop": true,
        "skipLibCheck": true,
        "forceConsistentCasingInFileNames": true,
-   
-       "outDir": "dist",
+
+      "outDir": "./lib/",
+      "declarationDir": "./lib/types/",
        "declaration": true,
      },
-   
-     "include": ["lib"],
+
+     "include": ["./src/**/*"],
      "exclude": [
       "./tests/",
       "./node_modules/",

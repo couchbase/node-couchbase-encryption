@@ -2,7 +2,8 @@
   "name": "cbfieldcrypt",
   "version": "2.0.0",
   "description": "",
-  "main": "./lib/crypto",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
   "scripts": {
     "prepare": "tsc",
     "build-docs": "typedoc",
