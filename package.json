@@ -29,7 +29,7 @@
     "eslint-plugin-jsdoc": "^32.3.0",
     "eslint-plugin-mocha": "^8.1.0",
     "eslint-plugin-node": "^11.1.0",
-    "mocha": "^8.3.1",
+    "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "prettier": "^2.2.1",
     "ts-mocha": "^8.0.0",
